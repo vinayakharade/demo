@@ -1,5 +1,4 @@
 /* GLOBAL */
-
 project_id                          = "searce-academy"
 region                              = "us-central1"
 vpc_name                            = "accelerators-vpc"
