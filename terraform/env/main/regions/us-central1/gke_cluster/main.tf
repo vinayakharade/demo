@@ -21,6 +21,7 @@ module "gke_private_cluster" {
   cluster_resource_labels    = var.gce_labels
 }
 
+
 module "gke_node_pool1" {
   source                         = "../../../modules/google_kubernetes_engine/gke_node_pool/"
   project_id                     = var.project
