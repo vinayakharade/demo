@@ -21,8 +21,8 @@ service_account_jenkins_apps = {
 }
 
 service_account_accelerators_apps_gke = {
-    service_account = "main-accelerators-apps-gke-sa"
-    role_name       = "main_accelerators_apps_gke_role"
+    service_account = "ac_main-accelerators-apps-gke-sa"
+    role_name       = "ac_main_accelerators_apps_gke_role"
     permissions = [
         "logging.logEntries.create",
         "monitoring.metricDescriptors.create",
