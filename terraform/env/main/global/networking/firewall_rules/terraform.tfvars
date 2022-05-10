@@ -1,0 +1,6 @@
+project_id      = "searce-academy"
+region          = "us-central1"
+vpc_name        = "accelerators-vpc" 
+deny_all_rule   = "ac-main-default-deny-int-all-all-all-deny-rule"
+lb_hc_fw_rule   = "ac-main-allow-hc-access-tcp-80-443-allow-rule"
+iap_ssh_fw_rule = "ac-main-iap-gooleip-allow-iap-tcp-22-3389-allow-rule"
