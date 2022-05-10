@@ -13,8 +13,8 @@ gke_cluster_svc_range_name     = "main-accelerators-gke-svc-range"
 master_ipv4_cidr_block         = "10.1.32.0/28" //modify accordingly
 
 # cluster configurations
-gke_cluster_master_version="1.20.10-gke.1600"
-gke_cluster_min_master_version="1.20.10-gke.1600"
+gke_cluster_master_version="1.21.10-gke.2000"
+gke_cluster_min_master_version="1.21.10-gke.2000"
 
 #Labels
 gce_labels = {
