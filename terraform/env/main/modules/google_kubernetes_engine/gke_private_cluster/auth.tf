@@ -23,6 +23,7 @@ data "google_client_config" "default" {
   provider = google
 }
 
+
 /******************************************
   Configure provider
  *****************************************/
