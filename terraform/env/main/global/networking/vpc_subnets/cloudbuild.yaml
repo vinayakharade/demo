@@ -120,48 +120,7 @@ steps:
       - |
         terraform apply -input=false -auto-approve
     id: terraform apply
-    entrypoint: sh   
-steps:
-  - name: 'hashicorp/terraform:1.0.7'
-    dir: terraform/env/main/global/iam/service-accounts
-    args:
-      - '-c'
-      - |
-        terraform init
-    id: terraform init
-    entrypoint: sh
-  - name: 'hashicorp/terraform:1.0.7'
-    dir: terraform/env/main/global/iam/service-accounts
-    args:
-      - '-c'
-      - |
-        terraform fmt
-    id: terraform fmt
-    entrypoint: sh
-  - name: 'hashicorp/terraform:1.0.7'
-    dir: terraform/env/main/global/iam/service-accounts
-    args:
-      - '-c'
-      - |
-        terraform validate
-    id: terraform validate
-    entrypoint: sh
-  - name: 'hashicorp/terraform:1.0.7'
-    dir: terraform/env/main/global/iam/service-accounts
-    args:
-      - '-c'
-      - |
-        terraform plan
-    id: terraform plan
-    entrypoint: sh
-  - name: 'hashicorp/terraform:1.0.7'
-    dir: terraform/env/main/global/iam/service-accounts
-    args:
-      - '-c'
-      - |
-        terraform apply -input=false -auto-approve
-    id: terraform apply
-    entrypoint: sh       
+    entrypoint: sh         
 logsBucket: 'gs://accelerators-us-central1'
 options:
   logging: GCS_ONLY         
