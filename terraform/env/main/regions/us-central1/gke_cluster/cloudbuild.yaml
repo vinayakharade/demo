@@ -38,7 +38,8 @@ steps:
       - |
         terraform apply -input=false -auto-approve
     id: terraform apply
-    entrypoint: sh       
+    entrypoint: sh  
+timeout: 1800s     
 logsBucket: 'gs://accelerators-us-central1'
 options:
   logging: GCS_ONLY         

@@ -34,3 +34,4 @@ while [[ "$current_status" == "RECONCILING" ]]; do
 done
 
 echo "Cluster is ready!"
+
