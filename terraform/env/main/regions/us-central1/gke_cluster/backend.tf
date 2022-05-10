@@ -2,6 +2,7 @@
 	GCS Bucket configuration for Terraform State management
  *****************************************/
 
+ 
 terraform {
   backend "gcs" {
     bucket = "accelerators-us-central1"
