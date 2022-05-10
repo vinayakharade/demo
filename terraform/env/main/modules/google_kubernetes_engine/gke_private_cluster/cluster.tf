@@ -65,6 +65,7 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+
   # master_auth {
   #   username = var.basic_auth_username
   #   password = var.basic_auth_password
