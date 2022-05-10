@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-output "firewall_rules" {
-  value       = google_compute_firewall.rules
-  description = "The created firewall rule resources"
+output "fw_id" {
+  description = "The URI of the created resource"
+  value       = google_compute_firewall.new-firewall.id
 }

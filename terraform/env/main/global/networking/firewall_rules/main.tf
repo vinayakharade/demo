@@ -3,8 +3,7 @@
  *****************************************/
 
 module "iap_ssh_fw_rule" {
-  source = "../../../modules/networking/firewall_rules"
-
+  source = "../../../modules/networking/firewall"
   network       = var.vpc_name
   name          = var.iap_ssh_fw_rule
   protocol      = "tcp"
@@ -20,8 +19,7 @@ module "iap_ssh_fw_rule" {
  *****************************************/
 
 module "lb_hc_fw_rule" {
-  source = "../../../modules/networking/firewall_rules"
-  
+  source = "../../../modules/networking/firewall"
   network                   = var.vpc_name
   name                      = var.lb_hc_fw_rule
   protocol                  = "tcp"
