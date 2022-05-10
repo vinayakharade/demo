@@ -96,3 +96,7 @@ variable "gke_cluster_master_version" {
   default = ""
 }
 
+variable "project_id" {
+  description = "Project ID to create gke"
+  type        = string
+}
