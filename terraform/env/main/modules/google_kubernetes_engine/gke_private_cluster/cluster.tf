@@ -65,14 +65,14 @@ resource "google_container_cluster" "primary" {
     }
   }
 
-  master_auth {
-    username = var.basic_auth_username
-    password = var.basic_auth_password
+  # master_auth {
+  #   username = var.basic_auth_username
+  #   password = var.basic_auth_password
 
-    client_certificate_config {
-      issue_client_certificate = var.issue_client_certificate
-    }
-  }
+  #   client_certificate_config {
+  #     issue_client_certificate = var.issue_client_certificate
+  #   }
+  # }
 
   addons_config {
     http_load_balancing {
