@@ -5,6 +5,6 @@
 terraform {
   backend "gcs" {
     bucket = "accelerators-us-central1"
-    prefix = "gcp-deployment/terraform/env/main/global/networking/firewall_rule"
+    prefix = "gcp-deployment/terraform/env/main/global/iam/service-accounts"
   }
 }
