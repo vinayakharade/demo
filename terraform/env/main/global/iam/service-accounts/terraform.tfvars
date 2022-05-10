@@ -1,7 +1,6 @@
 project_id = "searce-academy" 
 region     = "us-central1"
 
-
 service_account_jenkins_apps = {
     service_account = "ac-main-jenkins-gce-sa"
     role_name       = "ac_main_jenkins_gce_role"
