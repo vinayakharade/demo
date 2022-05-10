@@ -3,7 +3,7 @@
  *****************************************/
 
 module "iap_ssh_fw_rule" {
-  source = "../../../modules/networking/firewall_rule"
+  source = "../../../modules/networking/firewall_rules"
 
   network       = var.vpc_name
   name          = var.iap_ssh_fw_rule
@@ -20,7 +20,7 @@ module "iap_ssh_fw_rule" {
  *****************************************/
 
 module "lb_hc_fw_rule" {
-  source = "../../../modules/networking/firewall_rule"
+  source = "../../../modules/networking/firewall_rules"
   
   network                   = var.vpc_name
   name                      = var.lb_hc_fw_rule
