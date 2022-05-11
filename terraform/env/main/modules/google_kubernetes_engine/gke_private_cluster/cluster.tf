@@ -191,12 +191,12 @@ resource "null_resource" "wait_for_cluster" {
   }
 
   provisioner "local-exec" {
-    command = "${path.module}/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
+    command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
   }
 
   provisioner "local-exec" {
     when    = destroy
-    command = "${path.module}/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
+    command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
   }
 
   depends_on = [
