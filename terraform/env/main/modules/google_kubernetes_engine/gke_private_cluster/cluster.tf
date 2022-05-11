@@ -182,25 +182,25 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = var.remove_default_node_pool
 }
 
-resource "null_resource" "wait_for_cluster" {
-  count = var.skip_provisioners ? 0 : 1
+# resource "null_resource" "wait_for_cluster" {
+#   count = var.skip_provisioners ? 0 : 1
 
-  triggers = {
-    project_id = var.project_id
-    name       = var.name
-  }
+#   triggers = {
+#     project_id = var.project_id
+#     name       = var.name
+#   }
 
-  provisioner "local-exec" {
-    command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
-  }
+#   provisioner "local-exec" {
+#     command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
+#   }
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
-  }
+#   provisioner "local-exec" {
+#     when    = destroy
+#     command = "/workspace/demo/terraform/env/main/modules/google_kubernetes_engine/gke_private_cluster/scripts/wait-for-cluster.sh ${self.triggers.project_id} ${self.triggers.name}"
+#   }
 
-  depends_on = [
-    google_container_cluster.primary,
-    # google_container_node_pool.pools,
-  ]
-}
+#   depends_on = [
+#     google_container_cluster.primary,
+#     # google_container_node_pool.pools,
+#   ]
+# }
