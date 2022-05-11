@@ -65,6 +65,8 @@ output "endpoint" {
     * to be up.
     */
     google_container_cluster.primary,
+    # google_container_node_pool.pools,
+    # null_resource.wait_for_cluster.id,
   ]
 }
 

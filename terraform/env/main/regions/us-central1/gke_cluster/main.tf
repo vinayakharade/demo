@@ -1,7 +1,7 @@
 module "gke_private_cluster" {
   source                     = "../../../modules/google_kubernetes_engine/gke_private_cluster/"
   project_id                 = var.project
-  name                       = "main-accelerators-apps-as-et1-gke"
+  name                       = "ac-main-accelerators-apps-gke"
   region                     = var.region
   network                    = var.network
   subnetwork                 = var.subnetwork
@@ -26,7 +26,7 @@ module "gke_node_pool1" {
   source                         = "../../../modules/google_kubernetes_engine/gke_node_pool/"
   project_id                     = var.project
   gke_cluster_name               = module.gke_private_cluster.name
-  node_pool_name                 = "main-accelerators-apps-as-et1-gke-np-01"
+  node_pool_name                 = "ac-main-accelerators-apps-gke-np-01"
   region                         = var.region
   regional                       = var.regional
   zones                          = module.gke_private_cluster.zones

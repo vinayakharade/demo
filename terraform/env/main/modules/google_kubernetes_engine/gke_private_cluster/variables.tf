@@ -89,6 +89,11 @@ variable "http_load_balancing" {
   description = "Enable httpload balancer addon"
   default     = true
 }
+variable "enable_shielded_nodes" {
+  type        = bool
+  description = "Enable shielded nodes in gke cluster"
+  default     = true
+}
 
 variable "network_policy" {
   type        = bool
@@ -107,6 +112,19 @@ variable "maintenance_start_time" {
   description = "Time window specified for daily or recurring maintenance operations in RFC3339 format"
   default     = "05:00"
 }
+
+# variable "maintenance" {
+#   type = object({
+#     start_time           = string
+#     end_time             = string
+#     recurrence_frequency = string
+#   })
+#   default = {
+#     start_time           = "2022-08-01T19:30:00Z"
+#     end_time             = "2022-08-01T23:30:00Z"
+#     recurrence_frequency = "FREQ=WEEKLY;BYDAY=MO,WE"
+#   }
+# }
 
 
 variable "ip_range_pods" {
@@ -362,3 +380,25 @@ variable "firewall_inbound_ports" {
   description = "List of TCP ports for admission/webhook controllers"
   default     = ["8443", "9443", "15017"]
 }
+
+variable "google_security_group" {
+  type        = string
+  description = "The name of the RBAC security group for use with Google security groups in Kubernetes RBAC. Group name must be in format gke-security-groups@yourdomain.com"
+  default     = null
+}
+
+variable "workload_identity_namespace" {
+  type        = string
+  description = "Workload Identity allows Kubernetes service accounts to act as a user-managed Google IAM Service Account. Currently, the only supported identity namespace is the project's default."
+  default     = null
+}
+
+# variable "enable_workload_identity" {
+#   type        = bool
+#   description = "Enable or disable workload_identity on GKE cluster"
+#   default     = false
+# }
+
+# variable "enable_binary_authorization" {
+#   type = bool
+# }

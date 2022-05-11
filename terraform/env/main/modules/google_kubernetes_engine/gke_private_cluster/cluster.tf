@@ -19,6 +19,16 @@
 /******************************************
   Create Container Cluster
  *****************************************/
+
+#########
+# Locals
+#########
+# locals {
+#   enable_workload_identity = var.enable_workload_identity ? [true] : []
+# }
+
+
+
 resource "google_container_cluster" "primary" {
   provider = google
 
@@ -27,10 +37,13 @@ resource "google_container_cluster" "primary" {
   project         = var.project_id
   resource_labels = var.cluster_resource_labels
 
-  location          = local.location
-  node_locations    = local.node_locations
-  cluster_ipv4_cidr = var.cluster_ipv4_cidr
-  network           = "projects/${local.network_project_id}/global/networks/${var.network}"
+  location              = local.location
+  node_locations        = local.node_locations
+  cluster_ipv4_cidr     = var.cluster_ipv4_cidr
+  enable_shielded_nodes = var.enable_shielded_nodes
+  network               = "projects/${local.network_project_id}/global/networks/${var.network}"
+
+  # enable_binary_authorization = var.enable_binary_authorization
 
   dynamic "network_policy" {
     for_each = local.cluster_network_policy
@@ -41,6 +54,19 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+  dynamic "authenticator_groups_config" {
+    for_each = var.google_security_group == null ? [] : tolist([var.google_security_group])
+    content {
+      security_group = var.google_security_group
+    }
+  }
+
+  dynamic "workload_identity_config" {
+    for_each = var.workload_identity_namespace == null ? [] : tolist([var.workload_identity_namespace])
+    content {
+      identity_namespace = var.workload_identity_namespace
+    }
+  }
 
   subnetwork = "projects/${local.network_project_id}/regions/${var.region}/subnetworks/${var.subnetwork}"
 
@@ -65,27 +91,26 @@ resource "google_container_cluster" "primary" {
     }
   }
 
+  master_auth {
+    username = var.basic_auth_username
+    password = var.basic_auth_password
 
-  # master_auth {
-  #   username = var.basic_auth_username
-  #   password = var.basic_auth_password
-
-  #   client_certificate_config {
-  #     issue_client_certificate = var.issue_client_certificate
-  #   }
-  # }
+    client_certificate_config {
+      issue_client_certificate = var.issue_client_certificate
+    }
+  }
 
   addons_config {
     http_load_balancing {
-      disabled = ! var.http_load_balancing
+      disabled = !var.http_load_balancing
     }
 
     horizontal_pod_autoscaling {
-      disabled = ! var.horizontal_pod_autoscaling
+      disabled = !var.horizontal_pod_autoscaling
     }
 
     network_policy_config {
-      disabled = ! var.network_policy
+      disabled = !var.network_policy
     }
   }
 
@@ -94,11 +119,16 @@ resource "google_container_cluster" "primary" {
     services_secondary_range_name = var.ip_range_services
   }
 
-  maintenance_policy {
-    daily_maintenance_window {
-      start_time = var.maintenance_start_time
-    }
-  }
+  # maintenance_policy {
+  #   # daily_maintenance_window {
+  #   #   start_time = var.maintenance_start_time
+  #   # }
+  #   recurring_window {
+  #     start_time = var.maintenance["start_time"]
+  #     end_time   = var.maintenance["end_time"]
+  #     recurrence = var.maintenance["recurrence_frequency"]
+  #   }
+  # }
 
   lifecycle {
     ignore_changes = [node_pool, initial_node_count]

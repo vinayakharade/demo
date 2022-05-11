@@ -45,14 +45,16 @@ resource "google_container_node_pool" "pools" {
   initial_node_count = var.enable_autoscaling ? var.initial_node_count : null
   node_count         = var.enable_autoscaling ? null : var.node_count
 
-
-
   dynamic "autoscaling" {
     for_each = local.enable_autoscaling
     content {
       min_node_count = var.min_node_count
       max_node_count = var.max_node_count
     }
+  }
+  upgrade_settings {
+    max_surge = var.max_surge
+    max_unavailable = var.max_unavailable
   }
 
   node_config {
@@ -73,6 +75,13 @@ resource "google_container_node_pool" "pools" {
     }
     labels          = var.labels
     service_account = var.service_account
+
+    dynamic "workload_metadata_config" {
+      for_each = var.workload_node_metadata == null ? [] : tolist([var.workload_node_metadata])
+      content {
+        node_metadata  = var.workload_node_metadata
+      }
+    }
   }
 
   lifecycle {

@@ -41,7 +41,12 @@ variable "min_node_count" {
 variable "max_node_count" {
   default = "3"
 }
-
+variable "max_surge" {
+  default = "1"
+}
+variable "max_unavailable" {
+  default = "0"
+}
 variable "image_type" {
   default = "COS"
 }
@@ -79,4 +84,10 @@ variable "labels" {
 
 variable "service_account" {
   default = ""
+}
+
+variable "workload_node_metadata" {
+  description = "How to expose the node metadata to the workload running on the node. Accepted values are `UNSPECIFIED` `GKE_METADATA_SERVER` `SECURE` `EXPOSE`"
+  default = null #disabled
+
 }
